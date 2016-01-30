@@ -33,7 +33,8 @@ data_raw <- merge(activities, data_with_id, by = 'activity_id') %>%
             select(subject, activity, contains('mean()'), contains('std()'))
 
 # Update names
-names(data_raw) <-  sub('^f', 'freq',
+names(data_raw) <-  sub('body_body_', 'body_',
+                    sub('^f', 'freq',
                     sub('^t', 'time',
                     sub('Gravity', '_gravity',
                     gsub('Body', '_body',
@@ -44,7 +45,7 @@ names(data_raw) <-  sub('^f', 'freq',
                     sub('-', '_',
                     sub('\\(\\)', '',
                        names(data_raw)
-                    ))))))))))
+                    )))))))))))
 
 # Aggregate per subject and activity
 data_agg <- data_raw %>%
